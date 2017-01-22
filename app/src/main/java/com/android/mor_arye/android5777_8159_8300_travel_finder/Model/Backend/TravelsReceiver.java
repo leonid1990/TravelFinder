@@ -12,10 +12,12 @@ public class TravelsReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equalsIgnoreCase("com.example.ezras.newUpdates")) {
+        if (intent.getAction().equalsIgnoreCase("com.android.mor_arye.android5777_8159_8300.newUpdates")) {
             char type = intent.getExtras().getChar("table");
-            if (type == 't')
-                Log.d("checkBR", "trips");
+            if (type == 'b'){
+                Log.d("checkBR", "business");
+//            Toast.makeText(this, "sent update broadcast", Toast.LENGTH_SHORT).show();
+            }
             else if (type == 'r')
                 Log.d("checkBR", "recreations");
             else

@@ -21,6 +21,8 @@
             android:name=".Model.Backend.TravelsReceiver"
             android:enabled="true"
             android:exported="true">
+            <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
             <intent-filter>
                 <action android:name="com.android.mor_arye.android5777_8159_8300.newUpdates" />
             </intent-filter>

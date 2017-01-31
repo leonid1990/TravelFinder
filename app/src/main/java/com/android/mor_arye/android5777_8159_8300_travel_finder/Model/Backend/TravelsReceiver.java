@@ -7,9 +7,22 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 public class TravelsReceiver extends BroadcastReceiver {
-    public static final String TravelApp_TAG = "TravelApp";
+    public static final String BR_TAG = "TravelsReceiver";
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Action: " + intent.getAction() + "\n");
+        sb.append("URI: " + intent.toUri(Intent.URI_INTENT_SCHEME).toString() + "\n");
+        String log = sb.toString();
+        Log.d(BR_TAG, log);
+        Toast.makeText(context, log, Toast.LENGTH_LONG).show();
+    }
+
+    /*
     private Context c;
     public TravelsReceiver() {
     }
@@ -39,5 +52,5 @@ public class TravelsReceiver extends BroadcastReceiver {
             else
                 Log.d("checkBR", "error");
         }
-    }
+    }*/
 }

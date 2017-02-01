@@ -9,6 +9,8 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Controller.MainActivity;
+
 public class TravelsReceiver extends BroadcastReceiver {
     public static final String BR_TAG = "TravelsReceiver";
 
@@ -30,6 +32,7 @@ public class TravelsReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, Intent intent) {
         if (intent.getAction().equalsIgnoreCase("com.android.mor_arye.android5777_8159_8300.newUpdates")) {
+
             char type = intent.getExtras().getChar("table");
             if (type == 'b'){
                 Log.d(TravelApp_TAG, "business");
@@ -45,7 +48,6 @@ public class TravelsReceiver extends BroadcastReceiver {
                         return null;
                     }
                 }.execute();
-
             }
             else if (type == 'r')
                 Log.d("checkBR", "recreations");

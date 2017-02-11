@@ -22,7 +22,7 @@ import java.util.Locale;
 public class ListDsManager implements IDSManager {
 
     public List<Business> businesses;
-    public List<Recreation> recreations;
+    public List<Recreation> travels;
 
     private boolean businessesUpdates = false;
     private boolean recreationsUpdates = false;
@@ -30,7 +30,7 @@ public class ListDsManager implements IDSManager {
     // constructor
     public ListDsManager() {
         businesses = new ArrayList<>();
-        recreations = new ArrayList<>();
+        travels = new ArrayList<>();
     }
 
     @Override
@@ -46,14 +46,14 @@ public class ListDsManager implements IDSManager {
     }
 
     @Override
-    public void insertRecreation(ContentValues newRecreation) {
+    public void insertTravel(ContentValues newTravel) {
         recreationsUpdates = true;
-        String dateB = newRecreation.getAsString("dateOfBeginning");
-        String dateE = newRecreation.getAsString("dateOfEnding");
+        String dateB = newTravel.getAsString("dateOfBeginning");
+        String dateE = newTravel.getAsString("dateOfEnding");
 
-        recreations.add(new Recreation(
-                TypeOfRecreation.valueOf(newRecreation.getAsString("typeOfRecreation")),
-                newRecreation.getAsString("nameOfCountry"),
+        travels.add(new Recreation(
+                TypeOfRecreation.valueOf(newTravel.getAsString("typeOfRecreation")),
+                newTravel.getAsString("nameOfCountry"),
                 new GregorianCalendar(
                         new Integer(dateB.substring(6,10)),
                         new Integer(dateB.substring(3,5)),
@@ -62,9 +62,9 @@ public class ListDsManager implements IDSManager {
                         new Integer(dateE.substring(6,10)),
                         new Integer(dateE.substring(3,5)),
                         new Integer(dateE.substring(0,2))),
-                newRecreation.getAsDouble("price"),
-                newRecreation.getAsString("description"),
-                newRecreation.getAsInteger("idBusiness")
+                newTravel.getAsDouble("price"),
+                newTravel.getAsString("description"),
+                newTravel.getAsInteger("idBusiness")
         ));
     }
 
@@ -76,8 +76,8 @@ public class ListDsManager implements IDSManager {
     }
 
     @Override
-    public Collection<Recreation> getAllRecreation() {
-        return recreations;
+    public Collection<Recreation> getAllTravels() {
+        return travels;
     }
     // ~~~~~~~~~~~~~~
 

@@ -14,7 +14,7 @@ import java.util.Collection;
 public interface IDSManager {
 
     public void insertBusiness(ContentValues newBusiness);
-    public void insertRecreation(ContentValues newRecreation);
+    public void insertTravel(ContentValues newTravel);
     public Collection<Business> getAllBusiness();
-    public Collection<Recreation> getAllRecreation();
+    public Collection<Recreation> getAllTravels();
 }

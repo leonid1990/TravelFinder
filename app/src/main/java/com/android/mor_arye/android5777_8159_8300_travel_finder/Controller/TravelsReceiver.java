@@ -1,4 +1,4 @@
-package com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend;
+package com.android.mor_arye.android5777_8159_8300_travel_finder.Controller;
 
 import android.content.BroadcastReceiver;
 import android.content.ContentValues;
@@ -7,9 +7,13 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.IDSManager;
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.ManagerFactory;
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Business;
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Recreation;
 
 public class TravelsReceiver extends BroadcastReceiver {
     public static final String BR_TAG = "TravelsReceiver";
@@ -54,15 +58,15 @@ public class TravelsReceiver extends BroadcastReceiver {
                     Log.d(BR_TAG, ex.getMessage());
                 }
             } else if (type == 'r') {
-                Log.d(BR_TAG, "recreations");
+                Log.d(BR_TAG, "travels");
                 try {
-                    Uri uriOfAllRecreations = Uri.parse("content://com.android.mor_arye.android5777_8159_8300/recreations");
+                    Uri uriOfAllRecreations = Uri.parse("content://com.android.mor_arye.android5777_8159_8300/travels");
                     Cursor result = context.getContentResolver().query(uriOfAllRecreations, null, null, null, null);
-                    final ContentValues recreation = new ContentValues();
+                    final ContentValues newTravel = new ContentValues();
                     if (result.moveToFirst()) {
                         do {
-                            DatabaseUtils.cursorRowToContentValues(result, recreation);
-                            DSManager.insertRecreation(recreation);
+                            DatabaseUtils.cursorRowToContentValues(result, newTravel);
+                            DSManager.insertTravel(newTravel);
                         }
                         while (result.moveToNext());
                     }
@@ -77,22 +81,9 @@ public class TravelsReceiver extends BroadcastReceiver {
     }
 
     private void getAllBusinesses() {
-        try
+        for (Business b: DSManager.getAllBusiness())
         {
-            Uri uriOfAllBusinesses = Uri.parse("content://com.android.mor_arye.android5777_8159_8300/businesses");
-            Cursor result = c.getContentResolver().query(uriOfAllBusinesses, null, null, null, null);
-            String str;
-            if (result.moveToFirst()) {
-                do {
-                    str = result.getString(result.getColumnIndex("nameBusiness"));
-                    Log.d(BR_TAG, str);
-                }
-                while (result.moveToNext());
-            }
-        }
-        catch (Exception ex)
-        {
-            Log.d(BR_TAG, ex.getMessage());
+            Toast.makeText(c, b.toString(), Toast.LENGTH_LONG).show();
         }
     }
 }

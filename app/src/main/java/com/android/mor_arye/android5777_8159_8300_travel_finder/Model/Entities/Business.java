@@ -15,6 +15,11 @@ public class Business {
     private String emailAddress;
     private String websiteLink;
 
+    @Override
+    public String toString() {
+        return nameBusiness;
+    }
+
     public Business(String nameBusiness, Address addressBusiness,
                     String phoneNumber,
                     String emailAddress,

@@ -18,7 +18,7 @@
         </activity>
 
         <receiver
-            android:name=".Model.Backend.TravelsReceiver"
+            android:name=".Controller.TravelsReceiver"
             android:enabled="true"
             android:exported="true">
             <action android:name="android.intent.action.BOOT_COMPLETED"/>

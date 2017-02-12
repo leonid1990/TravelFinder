@@ -11,8 +11,11 @@ import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.T
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by mor on 26 נובמבר 2016.
@@ -71,13 +74,49 @@ public class ListDsManager implements IDSManager {
     // ~~~~~~~ get all collections ~~~~~~~
 
     @Override
-    public Collection<Business> getAllBusiness() {
+    public Collection<Business> getAllBusinesses() {
         return businesses;
     }
 
     @Override
     public Collection<Recreation> getAllTravels() {
         return travels;
+    }
+
+    @Override
+    public Collection<Recreation> getTravelsByCountry(String nameOfCountry) {
+        HashMap<String, Collection<Recreation>> hashMap = new HashMap<String, Collection<Recreation>>();
+        for (Recreation travel: getAllTravels())
+        {
+            if (!hashMap.containsKey("Country")) {
+                List<Recreation> list = new ArrayList<Recreation>();
+                list.add(travel);
+
+                hashMap.put("Country", list);
+            } else {
+                hashMap.get("Country").add(travel);
+            }
+        }
+
+        return hashMap.get(nameOfCountry);
+    }
+
+    @Override
+    public Collection<Recreation> getTravelsByBusiness(String nameOfBusiness) {
+        HashMap<String, Collection<Recreation>> hashMap = new HashMap<String, Collection<Recreation>>();
+        for (Recreation travel: getAllTravels())
+        {
+            if (!hashMap.containsKey("Country")) {
+                List<Recreation> list = new ArrayList<Recreation>();
+                list.add(travel);
+
+                hashMap.put("Country", list);
+            } else {
+                hashMap.get("Country").add(travel);
+            }
+        }
+
+        return hashMap.get(nameOfBusiness);
     }
     // ~~~~~~~~~~~~~~
 

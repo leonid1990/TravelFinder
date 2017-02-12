@@ -8,16 +8,13 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.IDSManager;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.ManagerFactory;
-import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Business;
-import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Recreation;
 
 public class TravelsReceiver extends BroadcastReceiver {
     public static final String BR_TAG = "TravelsReceiver";
-    private static IDSManager DSManager = ManagerFactory.getDS();
+    public static IDSManager DSManager = ManagerFactory.getDS();
 
     /*
         @Override
@@ -75,15 +72,6 @@ public class TravelsReceiver extends BroadcastReceiver {
                 }
             } else
                 Log.d(BR_TAG, "error");
-
-            getAllBusinesses();
-        }
-    }
-
-    private void getAllBusinesses() {
-        for (Business b: DSManager.getAllBusiness())
-        {
-            Toast.makeText(c, b.toString(), Toast.LENGTH_LONG).show();
         }
     }
 }

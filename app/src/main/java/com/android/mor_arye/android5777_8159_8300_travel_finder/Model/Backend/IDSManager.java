@@ -15,6 +15,8 @@ public interface IDSManager {
 
     public void insertBusiness(ContentValues newBusiness);
     public void insertTravel(ContentValues newTravel);
-    public Collection<Business> getAllBusiness();
+    public Collection<Business> getAllBusinesses();
     public Collection<Recreation> getAllTravels();
+    public Collection<Recreation> getTravelsByCountry(String nameOfCountry);
+    public Collection<Recreation> getTravelsByBusiness(String nameOfBusiness);
 }

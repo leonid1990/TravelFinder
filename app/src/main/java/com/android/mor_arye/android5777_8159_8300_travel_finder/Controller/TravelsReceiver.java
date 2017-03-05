@@ -49,6 +49,7 @@ public class TravelsReceiver extends BroadcastReceiver {
 
             char type = intent.getExtras().getChar("table");
             if (type == 'b') {
+                DSManager.getAllBusinesses().clear();
                 Toast.makeText(context, "TravelFinder: New business added!", Toast.LENGTH_LONG).show();
                 Uri uriOfAllBusinesses = Uri.parse("content://com.android.mor_arye.android5777_8159_8300/businesses");
                 try {
@@ -66,6 +67,7 @@ public class TravelsReceiver extends BroadcastReceiver {
                 }
             } else if (type == 'r') {
                 try {
+                    DSManager.getAllTravels().clear();
                     Uri uriOfAllRecreations = Uri.parse("content://com.android.mor_arye.android5777_8159_8300/recreations");
                     Cursor result = context.getContentResolver().query(uriOfAllRecreations, null,
                             null, null, null);
@@ -102,24 +104,5 @@ public class TravelsReceiver extends BroadcastReceiver {
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.putInt(COUNT_KEY, numOfTravels);
         editor.commit();
-    }
-
-    public String findPassword(Cursor cursor, int userId)
-    {
-        boolean found = false;
-        int position = -1;
-        while (cursor.moveToNext() && !found)
-        {
-            if (cursor.getInt(cursor.getColumnIndex("UserId")) == userId)
-            {
-                found = true;
-                position = cursor.getPosition();
-            }
-        }
-        cursor.moveToPosition(position);
-        String result = cursor.getString(cursor.getColumnIndex("UserPassword"));
-        cursor.close();
-
-        return result;
     }
 }

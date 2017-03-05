@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.IDSManager;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.ManagerFactory;
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Recreation;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,15 +25,19 @@ public class MainActivity extends AppCompatActivity {
         try
         {
             Log.d(DS_TAG,"Businesses: " + TravelsReceiver.DSManager.getAllBusinesses().toString() + '\n');
-            Log.d(DS_TAG,"Travels: " + TravelsReceiver.DSManager.getAllTravels().toString() + '\n');
-            Log.d(DS_TAG,"Travels by Afghanistan: " +
+            Log.d(DS_TAG,"\nTravels: ");
+            for (Recreation r: DSManager.getAllTravels())
+            {
+                Log.d(DS_TAG,r.toString() + ", ");
+            }
+            /*Log.d(DS_TAG,"Travels by Afghanistan: " +
                     TravelsReceiver.DSManager.getTravelsByCountry("Afghanistan").toString() + '\n');
             Log.d(DS_TAG,"Travels by Albania: " +
                     TravelsReceiver.DSManager.getTravelsByCountry("Albania").toString() + '\n');
             Log.d(DS_TAG,"Travels by JCT: " +
                     TravelsReceiver.DSManager.getTravelsByBusiness("JCT").toString());
             Log.d(DS_TAG,"Travels by BIU: " +
-                    TravelsReceiver.DSManager.getTravelsByBusiness("JCT").toString());
+                    TravelsReceiver.DSManager.getTravelsByBusiness("BIU").toString());*/
         }
         catch (Exception ex)
         {

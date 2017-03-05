@@ -1,5 +1,7 @@
 package com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
@@ -18,10 +20,12 @@ public class Recreation {
     @Override
     public String toString() {
         String name = "Country: " + nameOfCountry;
-        String dateOfBeginning = getDateOfBeginning().toString();
-        String dateOfEnding = getDateOfEnding().toString();
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String dateOfBeginning = df.format(getDateOfBeginning().getTime());
+        String dateOfEnding = df.format(getDateOfEnding().getTime());
 
-        return name + '\n' + dateOfBeginning + '\n' + getDateOfEnding();
+        return name + '\n' + dateOfBeginning + '\n' + dateOfEnding + '\n'
+                + getTypeOfRecreation() + '\n' + description;
     }
 
     public Recreation(TypeOfRecreation typeOfRecreation,

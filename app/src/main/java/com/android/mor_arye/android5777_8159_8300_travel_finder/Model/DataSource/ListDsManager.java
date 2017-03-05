@@ -2,14 +2,18 @@ package com.android.mor_arye.android5777_8159_8300_travel_finder.Model.DataSourc
 
 import android.content.ContentValues;
 import android.location.Address;
+import android.util.Log;
 
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.IDSManager;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Business;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Recreation;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.TypeOfRecreation;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
@@ -51,20 +55,28 @@ public class ListDsManager implements IDSManager {
     @Override
     public void insertTravel(ContentValues newTravel) {
         recreationsUpdates = true;
-        String dateB = newTravel.getAsString("dateOfBeginning");
-        String dateE = newTravel.getAsString("dateOfEnding");
-
+        GregorianCalendar calB = new GregorianCalendar();
+        GregorianCalendar calE = new GregorianCalendar();
+        try {
+            calB = strToCal(newTravel.getAsString("dateOfBeginning"));
+            calE = strToCal(newTravel.getAsString("dateOfEnding"));
+        }
+        catch (Exception e)
+        {
+            Log.d("Date error", e.getMessage());
+        }
         travels.add(new Recreation(
                 TypeOfRecreation.valueOf(newTravel.getAsString("typeOfRecreation")),
                 newTravel.getAsString("nameOfCountry"),
-                new GregorianCalendar(
+                /*new GregorianCalendar(
                         new Integer(dateB.substring(6,10)),
                         new Integer(dateB.substring(3,5)),
                         new Integer(dateB.substring(0,2))),
                 new GregorianCalendar(
                         new Integer(dateE.substring(6,10)),
                         new Integer(dateE.substring(3,5)),
-                        new Integer(dateE.substring(0,2))),
+                        new Integer(dateE.substring(0,2))),*/
+                calB, calE,
                 newTravel.getAsDouble("price"),
                 newTravel.getAsString("description"),
                 newTravel.getAsInteger("idBusiness")
@@ -117,6 +129,15 @@ public class ListDsManager implements IDSManager {
         }
 
         return hashMap.get(nameOfBusiness);
+    }
+    public GregorianCalendar strToCal(String strDate) throws Exception
+    {
+        DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        Date date = df.parse(strDate);
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.setTime(date);
+
+        return cal;
     }
     // ~~~~~~~~~~~~~~
 

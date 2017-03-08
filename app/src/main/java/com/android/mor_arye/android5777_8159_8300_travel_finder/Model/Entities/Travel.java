@@ -8,8 +8,7 @@ import java.util.GregorianCalendar;
  * Created by Leon on 23-Nov-16.
  */
 
-public class Recreation {
-    TypeOfRecreation typeOfRecreation;
+public class Travel {
     String nameOfCountry;
     GregorianCalendar dateOfBeginning;
     GregorianCalendar dateOfEnding;
@@ -19,24 +18,21 @@ public class Recreation {
 
     @Override
     public String toString() {
-        String name = "Country: " + nameOfCountry;
+        String country = "Country: " + nameOfCountry;
         DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String dateOfBeginning = df.format(getDateOfBeginning().getTime());
         String dateOfEnding = df.format(getDateOfEnding().getTime());
 
-        return name + '\n' + dateOfBeginning + '\n' + dateOfEnding + '\n'
-                + getTypeOfRecreation() + '\n' + description;
+        return "Travel to " + country + '\n' + dateOfBeginning + '\n' + dateOfEnding + '\n' + description;
     }
 
-    public Recreation(TypeOfRecreation typeOfRecreation,
-                      String nameOfCountry,
-                      GregorianCalendar dateOfBeginning,
-                      GregorianCalendar dateOfEnding,
-                      double price,
-                      String description,
-                      int idBusiness) {
+    public Travel(String nameOfCountry,
+                  GregorianCalendar dateOfBeginning,
+                  GregorianCalendar dateOfEnding,
+                  double price,
+                  String description,
+                  int idBusiness) {
 
-        this.typeOfRecreation = typeOfRecreation;
         this.nameOfCountry = nameOfCountry;
         this.dateOfBeginning = dateOfBeginning;
         this.dateOfEnding = dateOfEnding;
@@ -47,13 +43,6 @@ public class Recreation {
 
 
     //<editor-fold desc="geters and seters">
-    public TypeOfRecreation getTypeOfRecreation() {
-        return typeOfRecreation;
-    }
-
-    public void setTypeOfRecreation(TypeOfRecreation typeOfRecreation) {
-        this.typeOfRecreation = typeOfRecreation;
-    }
 
     public String getNameOfCountry() {
         return nameOfCountry;

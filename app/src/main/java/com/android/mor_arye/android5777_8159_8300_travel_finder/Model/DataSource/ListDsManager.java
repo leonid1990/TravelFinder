@@ -6,8 +6,7 @@ import android.util.Log;
 
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.IDSManager;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Business;
-import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Recreation;
-import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.TypeOfRecreation;
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Travel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,8 +17,6 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created by mor on 26 נובמבר 2016.
@@ -29,7 +26,7 @@ import java.util.stream.Collectors;
 public class ListDsManager implements IDSManager {
 
     public List<Business> businesses;
-    public List<Recreation> travels;
+    public List<Travel> travels;
 
     private boolean businessesUpdates = false;
     private boolean recreationsUpdates = false;
@@ -65,8 +62,7 @@ public class ListDsManager implements IDSManager {
         {
             Log.d("Date error", e.getMessage());
         }
-        travels.add(new Recreation(
-                TypeOfRecreation.valueOf(newTravel.getAsString("typeOfRecreation")),
+        travels.add(new Travel(
                 newTravel.getAsString("nameOfCountry"),
                 /*new GregorianCalendar(
                         new Integer(dateB.substring(6,10)),
@@ -91,17 +87,17 @@ public class ListDsManager implements IDSManager {
     }
 
     @Override
-    public Collection<Recreation> getAllTravels() {
+    public Collection<Travel> getAllTravels() {
         return travels;
     }
 
     @Override
-    public Collection<Recreation> getTravelsByCountry(String nameOfCountry) {
-        HashMap<String, Collection<Recreation>> hashMap = new HashMap<String, Collection<Recreation>>();
-        for (Recreation travel: getAllTravels())
+    public Collection<Travel> getTravelsByCountry(String nameOfCountry) {
+        HashMap<String, Collection<Travel>> hashMap = new HashMap<String, Collection<Travel>>();
+        for (Travel travel: getAllTravels())
         {
             if (!hashMap.containsKey("Country")) {
-                List<Recreation> list = new ArrayList<Recreation>();
+                List<Travel> list = new ArrayList<Travel>();
                 list.add(travel);
 
                 hashMap.put("Country", list);
@@ -114,12 +110,12 @@ public class ListDsManager implements IDSManager {
     }
 
     @Override
-    public Collection<Recreation> getTravelsByBusiness(String nameOfBusiness) {
-        HashMap<String, Collection<Recreation>> hashMap = new HashMap<String, Collection<Recreation>>();
-        for (Recreation travel: getAllTravels())
+    public Collection<Travel> getTravelsByBusiness(String nameOfBusiness) {
+        HashMap<String, Collection<Travel>> hashMap = new HashMap<String, Collection<Travel>>();
+        for (Travel travel: getAllTravels())
         {
             if (!hashMap.containsKey("Country")) {
-                List<Recreation> list = new ArrayList<Recreation>();
+                List<Travel> list = new ArrayList<Travel>();
                 list.add(travel);
 
                 hashMap.put("Country", list);

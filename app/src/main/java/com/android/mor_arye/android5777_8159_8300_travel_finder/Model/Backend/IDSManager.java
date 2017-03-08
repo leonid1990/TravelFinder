@@ -3,7 +3,7 @@ package com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend;
 import android.content.ContentValues;
 
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Business;
-import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Recreation;
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Travel;
 
 import java.util.Collection;
 
@@ -16,7 +16,7 @@ public interface IDSManager {
     public void insertBusiness(ContentValues newBusiness);
     public void insertTravel(ContentValues newTravel);
     public Collection<Business> getAllBusinesses();
-    public Collection<Recreation> getAllTravels();
-    public Collection<Recreation> getTravelsByCountry(String nameOfCountry);
-    public Collection<Recreation> getTravelsByBusiness(String nameOfBusiness);
+    public Collection<Travel> getAllTravels();
+    public Collection<Travel> getTravelsByCountry(String nameOfCountry);
+    public Collection<Travel> getTravelsByBusiness(String nameOfBusiness);
 }

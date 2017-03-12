@@ -1,7 +1,10 @@
 package com.android.mor_arye.android5777_8159_8300_travel_finder.Model.DataSource;
 
 import android.content.ContentValues;
+import android.database.Cursor;
 import android.location.Address;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.IDSManager;
@@ -24,6 +27,8 @@ import java.util.Locale;
 
 
 public class ListDsManager implements IDSManager {
+
+    public static final String LIST_DS_TAG = "ListDsManager";
 
     public List<Business> businesses;
     public List<Travel> travels;
@@ -52,16 +57,8 @@ public class ListDsManager implements IDSManager {
     @Override
     public void insertTravel(ContentValues newTravel) {
         recreationsUpdates = true;
-        GregorianCalendar calB = new GregorianCalendar();
-        GregorianCalendar calE = new GregorianCalendar();
-        try {
-            calB = strToCal(newTravel.getAsString("dateOfBeginning"));
-            calE = strToCal(newTravel.getAsString("dateOfEnding"));
-        }
-        catch (Exception e)
-        {
-            Log.d("Date error", e.getMessage());
-        }
+        GregorianCalendar calB = strToCal(newTravel.getAsString("dateOfBeginning"));
+        GregorianCalendar calE = strToCal(newTravel.getAsString("dateOfEnding"));
         travels.add(new Travel(
                 newTravel.getAsString("nameOfCountry"),
                 /*new GregorianCalendar(
@@ -96,13 +93,13 @@ public class ListDsManager implements IDSManager {
         HashMap<String, Collection<Travel>> hashMap = new HashMap<String, Collection<Travel>>();
         for (Travel travel: getAllTravels())
         {
-            if (!hashMap.containsKey("Country")) {
+            if (!hashMap.containsKey(travel.getNameOfCountry())) {
                 List<Travel> list = new ArrayList<Travel>();
                 list.add(travel);
 
-                hashMap.put("Country", list);
+                hashMap.put(travel.getNameOfCountry(), list);
             } else {
-                hashMap.get("Country").add(travel);
+                hashMap.get(travel.getNameOfCountry()).add(travel);
             }
         }
 
@@ -111,25 +108,44 @@ public class ListDsManager implements IDSManager {
 
     @Override
     public Collection<Travel> getTravelsByBusiness(String nameOfBusiness) {
-        HashMap<String, Collection<Travel>> hashMap = new HashMap<String, Collection<Travel>>();
+        HashMap<Integer, Collection<Travel>> hashMap = new HashMap<Integer, Collection<Travel>>();
         for (Travel travel: getAllTravels())
         {
-            if (!hashMap.containsKey("Country")) {
+            if (!hashMap.containsKey(travel.getIdBusiness())) {
                 List<Travel> list = new ArrayList<Travel>();
                 list.add(travel);
 
-                hashMap.put("Country", list);
+                hashMap.put(travel.getIdBusiness(), list);
             } else {
-                hashMap.get("Country").add(travel);
+                hashMap.get(travel.getIdBusiness()).add(travel);
             }
         }
 
-        return hashMap.get(nameOfBusiness);
+        return hashMap.get(getBusinessIdByName(nameOfBusiness));
     }
-    public GregorianCalendar strToCal(String strDate) throws Exception
+
+    public Integer getBusinessIdByName(String nameOfBusiness) {
+        Integer result = -1;
+        for (Business b : getAllBusinesses()) {
+            if (b.getNameBusiness().equals(nameOfBusiness))
+                result = b.getIdBusiness();
+        }
+
+        return result;
+    }
+
+    public GregorianCalendar strToCal(String strDate)
     {
+        Date date;
         DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
-        Date date = df.parse(strDate);
+        try{
+            date = df.parse(strDate);
+        }
+        catch (Exception e){
+            Log.d(LIST_DS_TAG, e.getMessage());
+            Log.d(LIST_DS_TAG, "Setting current date.");
+            date = new Date();
+        }
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTime(date);
 

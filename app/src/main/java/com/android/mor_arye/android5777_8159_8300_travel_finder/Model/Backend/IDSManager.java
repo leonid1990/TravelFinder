@@ -19,4 +19,5 @@ public interface IDSManager {
     public Collection<Travel> getAllTravels();
     public Collection<Travel> getTravelsByCountry(String nameOfCountry);
     public Collection<Travel> getTravelsByBusiness(String nameOfBusiness);
+    public Integer getBusinessIdByName(String nameOfBusiness);
 }

@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
             DsUpdater.FillUpDS(this);
         }
         catch (Exception ex) {
-            Log.d(DsUpdater.UPDATER_TAG, ex.getMessage());
+            Log.d(DS_TAG, ex.getMessage());
         }
     }
 
@@ -41,14 +41,30 @@ public class MainActivity extends AppCompatActivity {
             {
                 Log.d(DS_TAG,r.toString() + ", ");
             }
-            /*Log.d(DS_TAG,"Travels by Afghanistan: " +
-                    TravelsReceiver.DSManager.getTravelsByCountry("Afghanistan").toString() + '\n');
-            Log.d(DS_TAG,"Travels by Albania: " +
-                    TravelsReceiver.DSManager.getTravelsByCountry("Albania").toString() + '\n');
-            Log.d(DS_TAG,"Travels by JCT: " +
-                    TravelsReceiver.DSManager.getTravelsByBusiness("JCT").toString());
-            Log.d(DS_TAG,"Travels by BIU: " +
-                    TravelsReceiver.DSManager.getTravelsByBusiness("BIU").toString());*/
+            if (DSManager.getTravelsByCountry("Afghanistan") != null) {
+                Log.d(DS_TAG, "\nTravels by Afghanistan:");
+                for (Travel r : DSManager.getTravelsByCountry("Afghanistan")) {
+                    Log.d(DS_TAG, r + ", ");
+                }
+            }
+            if (DSManager.getTravelsByCountry("Albania") != null) {
+                Log.d(DS_TAG, "\nTravels by Albania:");
+                for (Travel r : DSManager.getTravelsByCountry("Albania")) {
+                    Log.d(DS_TAG, r + ", ");
+                }
+            }
+            if (DSManager.getTravelsByBusiness("JCT") != null) {
+                Log.d(DS_TAG, "\nTravels by JCT:");
+                for (Travel r : DSManager.getTravelsByBusiness("jct")) {
+                    Log.d(DS_TAG, r + ", ");
+                }
+            }
+            if (DSManager.getTravelsByBusiness("BIU") != null) {
+                Log.d(DS_TAG, "\nTravels by BIU:");
+                for (Travel r : DSManager.getTravelsByBusiness("biu")) {
+                    Log.d(DS_TAG, r + ", ");
+                }
+            }
         }
         catch (Exception ex)
         {

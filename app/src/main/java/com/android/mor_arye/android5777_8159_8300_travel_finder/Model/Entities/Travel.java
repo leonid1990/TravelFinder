@@ -18,12 +18,11 @@ public class Travel {
 
     @Override
     public String toString() {
-        String country = "Country: " + nameOfCountry;
         DateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String dateOfBeginning = df.format(getDateOfBeginning().getTime());
         String dateOfEnding = df.format(getDateOfEnding().getTime());
 
-        return "Travel to " + country + '\n' + dateOfBeginning + '\n' + dateOfEnding + '\n' + description;
+        return "Travel to " + nameOfCountry + '\n' + dateOfBeginning + '\n' + dateOfEnding + '\n' + description;
     }
 
     public Travel(String nameOfCountry,

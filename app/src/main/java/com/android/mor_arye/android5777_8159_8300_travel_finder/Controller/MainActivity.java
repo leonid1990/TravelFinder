@@ -14,6 +14,7 @@ import com.android.mor_arye.android5777_8159_8300_travel_finder.R;
 public class MainActivity extends AppCompatActivity {
 
     public static final String DS_TAG = "testDS";
+    IDSManager DSManager = ManagerFactory.getDS();
     /*SharedPreferences sharedpreferences;
     public static final String PREFS_NAME = "MyPrefsFile";
     public static final String COUNT_KEY = "countKey";*/
@@ -21,18 +22,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        try {
-            DsUpdater.FillUpDS(this);
-        }
-        catch (Exception ex) {
-            Log.d(DS_TAG, ex.getMessage());
+        if (DSManager.getAllBusinesses().isEmpty()) {
+            try {
+                DsUpdater.FillUpDS(this);
+            } catch (Exception ex) {
+                Log.d(DS_TAG, ex.getMessage());
+            }
         }
     }
 
     public void testDS(View view)
     {
-        IDSManager DSManager = ManagerFactory.getDS();
-
         try
         {
             Log.d(DS_TAG,"Businesses: " + DSManager.getAllBusinesses().toString() + '\n');
@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(DS_TAG, r + ", ");
                 }
             }
-            if (DSManager.getTravelsByBusiness("JCT") != null) {
+            if (DSManager.getTravelsByBusiness("jct") != null) {
                 Log.d(DS_TAG, "\nTravels by JCT:");
                 for (Travel r : DSManager.getTravelsByBusiness("jct")) {
                     Log.d(DS_TAG, r + ", ");
                 }
             }
-            if (DSManager.getTravelsByBusiness("BIU") != null) {
+            if (DSManager.getTravelsByBusiness("biu") != null) {
                 Log.d(DS_TAG, "\nTravels by BIU:");
                 for (Travel r : DSManager.getTravelsByBusiness("biu")) {
                     Log.d(DS_TAG, r + ", ");

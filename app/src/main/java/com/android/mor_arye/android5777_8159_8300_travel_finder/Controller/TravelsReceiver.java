@@ -8,6 +8,8 @@ import android.util.Log;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.DsUpdater;
 
 public class TravelsReceiver extends BroadcastReceiver {
+    private static final String CP_TAG = "EntertainmentContent" ;
+
     public TravelsReceiver() {}
     Context c;
 
@@ -19,6 +21,7 @@ public class TravelsReceiver extends BroadcastReceiver {
                 DsUpdater.updateDS(intent.getExtras().getChar("table"), context);
             }
             catch (Exception e){
+                Log.d(CP_TAG, "inside onReceive in TravelsReceiver " + e.getMessage());
                 Log.d(DsUpdater.UPDATER_TAG, e.getMessage());
             }
         }

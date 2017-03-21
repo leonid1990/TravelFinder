@@ -7,10 +7,9 @@ import android.location.Address;
  */
 
 public class Business {
-    private static int currentID = 1;
     private int idBusiness;
     private String nameBusiness;
-    private Address addressBusiness;
+    private String addressBusiness;
     private String phoneNumber;
     private String emailAddress;
     private String websiteLink;
@@ -20,12 +19,13 @@ public class Business {
         return nameBusiness;
     }
 
-    public Business(String nameBusiness, Address addressBusiness,
+    public Business(int idBusiness, String nameBusiness,
+                    String addressBusiness,
                     String phoneNumber,
                     String emailAddress,
                     String websiteLink) {
 
-        this.idBusiness = currentID++;
+        this.idBusiness = idBusiness;
         this.nameBusiness = nameBusiness;
         this.addressBusiness = addressBusiness;
         this.phoneNumber = phoneNumber;
@@ -51,11 +51,11 @@ public class Business {
         this.nameBusiness = nameBusiness;
     }
 
-    public Address getAddressBusiness() {
+    public String getAddressBusiness() {
         return addressBusiness;
     }
 
-    public void setAddressBusiness(Address addressBusiness) {
+    public void setAddressBusiness(String addressBusiness) {
         this.addressBusiness = addressBusiness;
     }
 

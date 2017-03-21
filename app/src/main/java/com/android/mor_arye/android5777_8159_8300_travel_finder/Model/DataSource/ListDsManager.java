@@ -46,8 +46,9 @@ public class ListDsManager implements IDSManager {
     public void insertBusiness(ContentValues newBusiness) {
         businessesUpdates=true;
         businesses.add(new Business(
+                newBusiness.getAsInteger("idBusiness"),
                 newBusiness.getAsString("nameBusiness"),
-                new Address(new Locale(newBusiness.getAsString("addressBusiness"))),
+                newBusiness.getAsString("addressBusiness"),
                 newBusiness.getAsString("phoneNumber"),
                 newBusiness.getAsString("emailAddress"),
                 newBusiness.getAsString("websiteLink")

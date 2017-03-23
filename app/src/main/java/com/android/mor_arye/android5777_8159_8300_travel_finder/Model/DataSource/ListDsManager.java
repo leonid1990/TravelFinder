@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Controller.TravelsReceiver;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.IDSManager;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Business;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities.Travel;
@@ -20,6 +21,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+
+import static com.android.mor_arye.android5777_8159_8300_travel_finder.Controller.TravelsReceiver.CP_TAG;
 
 /**
  * Created by mor on 26 נובמבר 2016.
@@ -145,6 +148,7 @@ public class ListDsManager implements IDSManager {
         catch (Exception e){
             Log.d(LIST_DS_TAG, e.getMessage());
             Log.d(LIST_DS_TAG, "Setting current date.");
+            Log.d(CP_TAG, "in strToCal in ListDsManager " + e.getMessage());
             date = new Date();
         }
         GregorianCalendar cal = new GregorianCalendar();

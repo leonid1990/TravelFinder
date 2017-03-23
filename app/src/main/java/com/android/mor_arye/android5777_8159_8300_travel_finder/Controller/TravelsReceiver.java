@@ -8,7 +8,7 @@ import android.util.Log;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.DsUpdater;
 
 public class TravelsReceiver extends BroadcastReceiver {
-    private static final String CP_TAG = "EntertainmentContent" ;
+    public static final String CP_TAG = "EntertainmentContent" ;
 
     public TravelsReceiver() {}
     Context c;

@@ -11,6 +11,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.android.mor_arye.android5777_8159_8300_travel_finder.Controller.TravelsReceiver.CP_TAG;
+
 /**
  * Created by Leon on 09-Mar-17.
  */
@@ -33,6 +35,7 @@ public class DsUpdater {
             }
             catch (Exception e){
                 Log.d(UPDATER_TAG, e.getMessage());
+                Log.d(CP_TAG, "in updateDS in DsUpdater: " + e.getMessage());
             }
         }
         else if (type == 'r') {
@@ -41,9 +44,11 @@ public class DsUpdater {
             }
             catch (Exception e){
                 Log.d(UPDATER_TAG, e.getMessage());
+                Log.d(CP_TAG, "in updateDS in DsUpdater: " + e.getMessage());
             }
         }
         else
+            Log.d(CP_TAG, "in updateDS in DsUpdater: 'else'");
             throw new Exception("Error. Expects a business or a travel.");
     }
     private static void fillUpTravels(Context context) throws Exception {

@@ -16,14 +16,19 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.IDSManager;
+import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.ManagerFactory;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.R;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Views.BusinessesFragment;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Views.DrawerItemCustomAdapter;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Views.ObjectDrawerItem;
 import com.android.mor_arye.android5777_8159_8300_travel_finder.Views.TravelsFragment;
 
-public class MainActivity extends ActionBarActivity {
+import static com.android.mor_arye.android5777_8159_8300_travel_finder.Controller.TravelsReceiver.CP_TAG;
+import static com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Backend.DsUpdater.FillUpDS;
 
+public class MainActivity extends ActionBarActivity {
+    public static IDSManager DSManager = ManagerFactory.getDS();
     // declare properties
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
@@ -109,6 +114,14 @@ public class MainActivity extends ActionBarActivity {
             // on first time display view for first nav item
             selectItem(0);
         }
+
+        if(DSManager.getAllBusinesses().isEmpty()){
+            try {
+                FillUpDS(this);
+            } catch (Exception e) {
+                Log.d(CP_TAG, "FillUpDS in onCreate in MainActivity: " + e.getMessage());
+            }
+        }
     }
 
     @Override
@@ -187,6 +200,7 @@ public class MainActivity extends ActionBarActivity {
         } else {
             // error in creating fragment
             Log.e("MainActivity", "Error in creating fragment");
+            Log.d(CP_TAG, "Error in creating fragment");
         }
     }
 

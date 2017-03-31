@@ -43,7 +43,7 @@ public interface IDSManager {
      * @return List of all travels in the DS grouped by business
      */
     public Collection<Travel> getTravelsByBusiness(String nameOfBusiness);
-    /** The method gets name of business and returns it's id
+    /** The method gets name of business and returns its id
      * @param nameOfBusiness
      * @return The id of the business
      */

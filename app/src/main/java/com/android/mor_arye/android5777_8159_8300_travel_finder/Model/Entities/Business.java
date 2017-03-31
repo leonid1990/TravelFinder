@@ -3,7 +3,7 @@ package com.android.mor_arye.android5777_8159_8300_travel_finder.Model.Entities;
 import android.location.Address;
 
 /**
- * Created by mor on 20 נובמבר 2016.
+ * Created by mor
  */
 
 public class Business {

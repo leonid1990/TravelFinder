@@ -15,18 +15,38 @@ import static com.android.mor_arye.android5777_8159_8300_travel_finder.Controlle
 
 /**
  * Created by Leon on 09-Mar-17.
+ * The class is responsible for updating the DS either when the app start
+ * running or when it's notified about new business or activity added to DB
  */
 
 public class DsUpdater {
     public static IDSManager DSManager = ManagerFactory.getDS();
     public static final String UPDATER_TAG = "DsUpdater";
 
-
+    /**
+     * The method fills the DS when started with existing info in in the DB
+     * @param c This is the context of the app
+     * @throws Exception
+     */
     public static void FillUpDS(Context c) throws Exception
     {
         fillUpBusinesses(c);
         fillUpTravels(c);
     }
+
+    /***
+     *
+     * @param type This is the type of the new object that was added to DB - business or travel
+     * @param c This is the context of the app
+     * @throws Exception
+     */
+
+    /**
+     * The method updates DS when the app notified about any change in the DB
+     * @param type This is the type of the new object that was added to DB - business or travel
+     * @param c This is the context of the app
+     * @throws Exception
+     */
     public static void updateDS(char type, Context c) throws Exception
     {
         if (type == 'b') {
@@ -51,11 +71,23 @@ public class DsUpdater {
             Log.d(CP_TAG, "in updateDS in DsUpdater: 'else'");
             throw new Exception("Error. Expects a business or a travel.");
     }
+
+    /**
+     * The method starts a new thread that will get all travels from the DB
+     * and will fill the list of travels in DS
+     * @param context This is the context of the app
+     * @throws Exception
+     */
     private static void fillUpTravels(Context context) throws Exception {
         TravelsAsyncTask task = new TravelsAsyncTask(context);
         task.execute();
     }
-
+    /**
+     * The method starts a new thread that will get all businesses from the DB
+     * and will fill the list of businesses in DS
+     * @param context This is the context of the app
+     * @throws Exception
+     */
     private static void fillUpBusinesses(Context context) throws Exception {
         BusinessesAsyncTask task = new BusinessesAsyncTask(context);
         task.execute();

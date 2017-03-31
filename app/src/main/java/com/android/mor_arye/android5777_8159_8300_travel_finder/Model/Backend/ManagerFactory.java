@@ -4,6 +4,7 @@ import com.android.mor_arye.android5777_8159_8300_travel_finder.Model.DataSource
 
 /**
  * Created by Leon on 09-Feb-17.
+ * FactoyMethod design pattern combined with Singleton
  */
 
 public class ManagerFactory {

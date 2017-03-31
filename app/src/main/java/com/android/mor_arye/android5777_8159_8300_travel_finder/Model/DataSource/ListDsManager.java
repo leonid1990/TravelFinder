@@ -25,7 +25,7 @@ import java.util.Locale;
 import static com.android.mor_arye.android5777_8159_8300_travel_finder.Controller.TravelsReceiver.CP_TAG;
 
 /**
- * Created by mor on 26 נובמבר 2016.
+ * Created by mor
  */
 
 
@@ -138,6 +138,11 @@ public class ListDsManager implements IDSManager {
         return result;
     }
 
+    /**
+     * The method coverts from string to GregorianCalendar object
+     * @param strDate This is the date in a string
+     * @return the date in GregorianCalendar object
+     */
     public GregorianCalendar strToCal(String strDate)
     {
         Date date;
